@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchArticles } from "../utils/api";
+import { Link } from "react-router-dom";
 
 function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -14,34 +15,27 @@ function ArticleList() {
         setArticles(articles);
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setError(true);
       });
   }, []);
 
-  if (error) {
-    return <p> There has been an error!!!</p>;
-  }
-
-  if (loading) {
-    return <p>Loading articles...</p>;
-  }
-
-  if (articles.length === 0) {
-    return <p>No articles available.</p>;
-  }
+  if (error) return <p>There has been an error loading articles.</p>;
+  if (loading) return <p>Loading articles...</p>;
+  if (articles.length === 0) return <p>No articles available.</p>;
 
   return (
     <section>
-      {articles.map((article) => {
-        return (
-          <div key={article.article_id}>
+      {articles.map((article) => (
+        <div key={article.article_id}>
+          <Link to={`/articles/${article.article_id}`}>
             <h3>{article.title}</h3>
-            <p>{article.body}</p>
-          </div>
-        );
-      })}
+            <p>Author: {article.author}</p>
+            <p>Comments: {article.comment_count}</p>
+          </Link>
+        </div>
+      ))}
     </section>
   );
 }
