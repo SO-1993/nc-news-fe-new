@@ -12,8 +12,14 @@ const fetchArticles = () => {
 
 const fetchArticlesById = (article_id) => {
   return api.get(`/articles/${article_id}`).then((response) => {
-    return response.data.article; // Fix for the singular response structure
+    return response.data.article;
   });
 };
 
-export { fetchArticles, fetchArticlesById };
+const fetchComments = (article_id) => {
+  return api.get(`/articles/${article_id}/comments`).then((response) => {
+    return response.data.comments;
+  });
+};
+
+export { fetchArticles, fetchArticlesById, fetchComments };
