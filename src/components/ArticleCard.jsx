@@ -5,8 +5,8 @@ function ArticleCard({ article }) {
       <p>Author: {article.author}</p>
       <p>Votes: {article.votes}</p>
       <p>Comments: {article.comment_count}</p>
-      <p>Vote Count: {article.votes}</p>
-      {/* <img className={styles.img}>src={article.article_img_url} /</img> */}
+      <p>Created at: {article.created_at}</p>
+      <img src={article.article_img_url} />
     </ul>
   );
 }

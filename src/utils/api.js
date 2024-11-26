@@ -22,4 +22,14 @@ const fetchComments = (article_id) => {
   });
 };
 
-export { fetchArticles, fetchArticlesById, fetchComments };
+const voteOnArticle = (article_id, inc_votes) => {
+  return api
+    .patch(`/articles/${article_id}`, {
+      inc_votes: inc_votes,
+    })
+    .then((response) => {
+      return response.data.article;
+    });
+};
+
+export { fetchArticles, fetchArticlesById, fetchComments, voteOnArticle };
