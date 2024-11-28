@@ -32,4 +32,18 @@ const voteOnArticle = (article_id, inc_votes) => {
     });
 };
 
-export { fetchArticles, fetchArticlesById, fetchComments, voteOnArticle };
+function postNewArticleComment(article_id, commentData) {
+  return api
+    .post(`/api/articles/${article_id}/comments`, commentData)
+    .then(({ data }) => {
+      return data.comment;
+    });
+}
+
+export {
+  fetchArticles,
+  fetchArticlesById,
+  fetchComments,
+  voteOnArticle,
+  postNewArticleComment,
+};

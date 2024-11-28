@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchArticles } from "../utils/api";
 import { Link } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
+import Navbar from "./Navbar";
 
 function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -28,6 +29,7 @@ function ArticleList() {
 
   return (
     <section>
+      <Navbar />
       {articles.map((article) => (
         <div key={article.article_id}>
           <Link to={`/articles/${article.article_id}`}>

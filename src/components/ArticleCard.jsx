@@ -6,7 +6,7 @@ function ArticleCard({ article }) {
       <p>Votes: {article.votes}</p>
       <p>Comments: {article.comment_count}</p>
       <p>Created at: {article.created_at}</p>
-      <img src={article.article_img_url} />
+      <img src={article.article_img_url} class="object-cover h-48 w-96 ..." />
     </ul>
   );
 }

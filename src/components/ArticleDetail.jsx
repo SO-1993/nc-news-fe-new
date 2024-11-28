@@ -4,13 +4,20 @@ import { fetchArticlesById } from "../utils/api";
 import ArticleCard from "./ArticleCard";
 import VoteButton from "./VoteButton";
 import CommentList from "./CommentList";
+import CommentInput from "./CommentInput";
 
 function ArticleDetail() {
   const { article_id } = useParams();
   const [article, setArticle] = useState(null);
   const [votes, setVotes] = useState(0);
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const handleNewComment = (newComment) => {
+    console.log("Adding new comment:", newComment);
+    setComments((prevComments) => [...prevComments, newComment]);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -36,7 +43,13 @@ function ArticleDetail() {
     <div>
       <ArticleCard article={article} />
       <VoteButton article_id={article_id} setVotes={setVotes} />
-      <CommentList article_id={article_id} />
+      <CommentList article_id={article_id} comments={comments} />
+      <CommentInput
+        article_id={article_id}
+        onNewComment={(newComment) =>
+          setComments((prev) => [newComment, ...prev])
+        }
+      />
     </div>
   );
 }
